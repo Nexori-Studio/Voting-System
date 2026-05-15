@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import PollCard from '@/components/PollCard';
 import { pollsApi, type Poll } from '@/api';
 import { useAuthStore } from '@/store/authStore';
-import { BarChart2, TrendingUp, Users, Loader2 } from 'lucide-react';
+import { BarChart2, TrendingUp, Users, Loader2, Plus, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function Home() {
   const [polls, setPolls] = useState<Poll[]>([]);
@@ -36,98 +36,104 @@ export default function Home() {
   const displayedPolls = activeTab === 'active' ? activePolls : endedPolls;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-purple-50/20">
+    <div className="min-h-screen">
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl mb-6 shadow-xl shadow-indigo-500/30">
-            <BarChart2 className="w-8 h-8 text-white" />
+        {/* Hero Section */}
+        <div className="text-center mb-16 fade-in">
+          <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl mb-8 shadow-2xl shadow-purple-500/30 animate-bounce">
+            <BarChart2 className="w-12 h-12 text-white" />
           </div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
-            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-5xl sm:text-6xl font-extrabold text-slate-900 mb-6">
+            <span className="text-gradient">
               发现精彩投票
             </span>
           </h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
             参与社区投票，表达你的观点。安全可靠，公平公正。
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-indigo-600" />
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="glass-card rounded-3xl p-8 glass-card-hover">
+            <div className="flex items-center gap-5">
+              <div className="w-16 h-16 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-2xl flex items-center justify-center">
+                <TrendingUp className="w-8 h-8 text-indigo-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-slate-900">{activePolls.length}</div>
-                <div className="text-sm text-slate-500">正在进行</div>
+                <div className="text-4xl font-extrabold text-slate-900">{activePolls.length}</div>
+                <div className="text-base text-slate-500 font-medium">正在进行</div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
-                <BarChart2 className="w-6 h-6 text-emerald-600" />
+          <div className="glass-card rounded-3xl p-8 glass-card-hover">
+            <div className="flex items-center gap-5">
+              <div className="w-16 h-16 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-2xl flex items-center justify-center">
+                <CheckCircle2 className="w-8 h-8 text-emerald-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-slate-900">{endedPolls.length}</div>
-                <div className="text-sm text-slate-500">已结束投票</div>
+                <div className="text-4xl font-extrabold text-slate-900">{endedPolls.length}</div>
+                <div className="text-base text-slate-500 font-medium">已结束投票</div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-lg transition-shadow">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6 text-purple-600" />
+          <div className="glass-card rounded-3xl p-8 glass-card-hover">
+            <div className="flex items-center gap-5">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl flex items-center justify-center">
+                <Users className="w-8 h-8 text-purple-600" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-slate-900">{polls.length}</div>
-                <div className="text-sm text-slate-500">投票总数</div>
+                <div className="text-4xl font-extrabold text-slate-900">{polls.length}</div>
+                <div className="text-base text-slate-500 font-medium">投票总数</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-2 mb-8">
+        {/* Tabs */}
+        <div className="flex items-center justify-center gap-3 mb-12">
           <button
             onClick={() => setActiveTab('active')}
-            className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+            className={`px-8 py-4 rounded-2xl text-base font-semibold transition-all duration-300 flex items-center gap-2 ${
               activeTab === 'active'
-                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
-                : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
+                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-2xl shadow-indigo-500/40'
+                : 'glass-card text-slate-700 hover:shadow-lg'
             }`}
           >
+            <Sparkles className="w-4 h-4" />
             进行中 ({activePolls.length})
           </button>
           <button
             onClick={() => setActiveTab('ended')}
-            className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+            className={`px-8 py-4 rounded-2xl text-base font-semibold transition-all duration-300 flex items-center gap-2 ${
               activeTab === 'ended'
-                ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30'
-                : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
+                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-2xl shadow-indigo-500/40'
+                : 'glass-card text-slate-700 hover:shadow-lg'
             }`}
           >
+            <CheckCircle2 className="w-4 h-4" />
             已结束 ({endedPolls.length})
           </button>
         </div>
 
+        {/* Loading or Poll List */}
         {isLoading ? (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 text-indigo-600 animate-spin" />
+          <div className="flex items-center justify-center py-24">
+            <Loader2 className="w-12 h-12 text-indigo-600 animate-spin" />
           </div>
         ) : displayedPolls.length === 0 ? (
-          <div className="text-center py-20">
-            <div className="w-20 h-20 bg-slate-100 rounded-2xl mx-auto mb-6 flex items-center justify-center">
-              <BarChart2 className="w-10 h-10 text-slate-400" />
+          <div className="text-center py-24 fade-in">
+            <div className="w-32 h-32 bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl mx-auto mb-8 flex items-center justify-center">
+              <BarChart2 className="w-16 h-16 text-slate-400" />
             </div>
-            <h3 className="text-xl font-semibold text-slate-700 mb-2">
+            <h3 className="text-2xl font-bold text-slate-800 mb-4">
               {activeTab === 'active' ? '暂无进行中的投票' : '暂无已结束的投票'}
             </h3>
-            <p className="text-slate-500 mb-6">
+            <p className="text-lg text-slate-500 mb-8">
               {activeTab === 'active' && isAuthenticated
                 ? '成为第一个发起投票的人吧！'
                 : '稍后再来看看吧'}
@@ -135,14 +141,15 @@ export default function Home() {
             {activeTab === 'active' && isAuthenticated && (
               <a
                 href="/create"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors"
+                className="inline-flex items-center gap-3 px-10 py-5 btn-primary text-lg"
               >
+                <Plus className="w-5 h-5" />
                 创建投票
               </a>
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {displayedPolls.map((poll) => (
               <PollCard
                 key={poll.id}
